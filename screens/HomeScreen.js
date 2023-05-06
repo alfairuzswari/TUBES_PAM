@@ -83,8 +83,9 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.welcomeContainer}>
-        <Text style={styles.welcomeText}>Selamat datang, {userName}!</Text>
+        <Text style={styles.welcomeText}>{'Selamat datang, '} {userName}{'! \nLagi Cari Kosan?'}</Text>
       </View>
+      <Text style={styles.TextRekomPromo}>Rekomendasi</Text>
       <View style={styles.recomendationList}>
         <FlatList
           data={items}
@@ -95,6 +96,7 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.promoList}>
+        <Text style={styles.TextRekomPromo}>Promo</Text>
         <FlatList
           data={items}
           numColumns={3}
@@ -110,7 +112,6 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 10,
     backgroundColor: '#ADB3BC',
     paddingTop: 20,
@@ -118,35 +119,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   buttonText: {
     color: 'white',
     fontSize: 18,
   },
-  listItemRecom: {
-    flex: 2,
-    alignItems: 'center',
-    backgroundColor: '#f8f8f8',
-    padding: 15,
-    marginRight: 10,
-    borderRadius: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
   welcomeContainer: {
-    marginTop: 20,
+    marginBottom: 10,
   },
   welcomeText: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  itemImageRecom: {
-    marginHorizontal: 10,
-    width: 100,
-    height: 100,
-    borderRadius: 5,
-    marginRight: 10,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -172,31 +156,47 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
+  itemImageRecom: {
+    marginHorizontal: 10,
+    width: '100%',
+    height: 100,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  listItemRecom: {
+    marginLeft: 10,
+    marginVertical: 10,
+    width: 140,
+    alignItems: 'center',
+    backgroundColor: '#f8f8f8',
+    borderRadius: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
   recomendationList: {
     marginVertical: 10,
     backgroundColor: '#666666',
   },
-  promoList: {
-    flexDirection: 'row',
-  },
   listItemPromo: {
-    marginBottom: 10,
-    width: '30%',
+    marginHorizontal: 7,
+    marginBottom: 5,
+    width: '33.3%',
     alignItems: 'center',
     backgroundColor: '#f8f8f8',
-    padding: 5,
-    marginRight: 10,
     borderRadius: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
   itemImagePromo: {
-    marginHorizontal: 10,
-    width: 100,
+    width: '100%',
     height: 100,
     borderRadius: 5,
-    marginRight: 10,
   },
+  TextRekomPromo: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 24,
+  }
 });
 
 export default HomeScreen;
