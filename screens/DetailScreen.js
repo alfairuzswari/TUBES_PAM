@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
 import firebase from '../firebase';
 
 const DetailScreen = ({ route }) => {
@@ -49,6 +53,39 @@ const DetailScreen = ({ route }) => {
             </TouchableOpacity>
             <Text style={styles.title}>{item.name}</Text>
             <Text style={styles.title}>{item.kostid}</Text>
+            <ScrollView>
+                <View style={styles.detailContainer}>
+                    <Text style={styles.desc}>Fasilitas Kamar</Text>
+                    <MaterialCommunityIcons name="air-conditioner" size={24} color="black" />
+                    <MaterialCommunityIcons name="bed-single" size={24} color="black" />
+                    <MaterialCommunityIcons name="desk" size={24} color="black" />
+                    <MaterialCommunityIcons name="cupboard" size={24} color="black" />
+                </View>
+                <View style={styles.detailContainer}>
+                    <Text style={styles.desc}>Fasilitas Kamar Mandi</Text>
+                    <FontAwesome name="bathtub" size={24} color="black" />
+                    <MaterialCommunityIcons name="toilet" size={24} color="black" />
+                    <FontAwesome name="shower" size={24} color="black" />
+                    <MaterialCommunityIcons name="hanger" size={24} color="black" />
+                </View>
+                <View style={styles.detailContainer}>
+                    <Text style={styles.desc}>Fasilitas Umum</Text>
+                    <Fontisto name="wifi-logo" size={24} color="black" />
+                    <MaterialCommunityIcons name="stove" size={24} color="black" />
+                    <MaterialCommunityIcons name="cctv" size={24} color="black" />
+                    <MaterialIcons name="local-parking" size={24} color="black" />
+                </View>
+                <View style={styles.detailContainer}>
+                    <Text style={styles.desc}>Peraturan Kos</Text>
+                    <MaterialCommunityIcons name="hours-24" size={24} color="black" />
+                    <Foundation name="no-dogs" size={24} color="black" />
+                    <Foundation name="no-smoking" size={24} color="black" />
+                </View>
+            </ScrollView>
+            <View style={styles.footer}>
+                <Text style={styles.price}>Rp. 6.500.000</Text>
+                <Text style={styles.button}>Ajukan Sewa</Text>
+            </View>
         </View>
     );
 };
@@ -58,9 +95,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     title: {
-        fontSize: 24,
+        fontSize: 26,
         fontWeight: 'bold',
-        marginBottom: 20,
     },
     itemImage: {
         width: '100%',
@@ -70,6 +106,33 @@ const styles = StyleSheet.create({
     favoriteButton: {
         alignSelf: 'flex-end',
     },
+    desc:{
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    detailContainer:{
+        alignItems: "flex-start",
+    },
+    button: {
+        alignSelf: "center",
+        backgroundColor: "#00AA13",
+        padding: 15,
+        paddingHorizontal: 50,
+        borderRadius: 30,
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "#00203FFF",
+        borderWidth: 1,
+        borderColor: "#00203FFF",
+      },
+      footer:{
+        borderRadius: 10,
+        backgroundColor: "#ffc0cb",
+        alignItems: "center",
+      },
+      price: {
+        fontSize: 18,
+      },
 });
 
 export default DetailScreen;
