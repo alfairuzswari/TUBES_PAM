@@ -1,21 +1,75 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, Button, Image } from 'react-native';
 import firebase from '../firebase';
+import * as ImagePicker from 'expo-image-picker';
 
 const EditProfileScreen = ({ navigation }) => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
+
+    const uploadImageToFirebase = async (uri) => {
+        const user = firebase.auth().currentUser;
+        const response = await fetch(uri);
+        const blob = await response.blob();
+
+        const storageRef = firebase.storage().ref().child(`profile_pictures/${user.uid}`);
+        const uploadTask = storageRef.put(blob);
+
+        return new Promise((resolve, reject) => {
+            uploadTask.on(
+                firebase.storage.TaskEvent.STATE_CHANGED,
+                (snapshot) => {
+                    // Progress updates are optional
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                    reject(error);
+                },
+                async () => {
+                    // Handle successful uploads on complete
+                    const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                    resolve(downloadURL);
+                }
+            );
+        });
+    };
+
 
     const handleSave = async () => {
         const user = firebase.auth().currentUser;
+        const updates = {};
 
         if (name !== '') {
-            await firebase.firestore().collection('users').doc(user.uid).update({ name });
+            updates.name = name;
+        }
+
+        if (image) {
+            const imageUrl = await uploadImageToFirebase(image);
+            updates.profilePicture = imageUrl;
+        }
+
+        if (Object.keys(updates).length > 0) {
+            await firebase.firestore().collection('users').doc(user.uid).update(updates);
         }
 
         if (password !== '') {
-            if (password == confirmPassword) {
+            if (password === confirmPassword) {
                 await user.updatePassword(password);
             } else {
                 Alert.alert('Error', 'Password and confirm password Tidak Sama');
@@ -25,6 +79,7 @@ const EditProfileScreen = ({ navigation }) => {
 
         navigation.goBack();
     };
+
 
     return (
         <View style={styles.container}>
@@ -51,6 +106,11 @@ const EditProfileScreen = ({ navigation }) => {
                 secureTextEntry
                 placeholder="Masukan Ulang Password Baru"
             />
+
+            <TouchableOpacity style={styles.uploadImageButton} onPress={pickImage}>
+                <Text style={styles.uploadImageButtonText}>Pick an image from camera roll</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity style={styles.button} onPress={handleSave}>
                 <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
@@ -88,6 +148,33 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         fontWeight: 'bold',
+    },
+    buttonContainer: {
+        marginTop: 20,
+    },
+    button: {
+        backgroundColor: '#4a90e2',
+        borderRadius: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 18,
+    },
+    uploadImageButton: {
+        backgroundColor: 'black',
+        borderRadius: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 50,
+    },
+    uploadImageButtonText: {
+        color: 'white',
+        fontSize: 18,
     },
 });
 

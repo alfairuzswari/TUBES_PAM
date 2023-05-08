@@ -7,7 +7,7 @@ const LoginPage = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-
+ 
     const goToRegisterPage = () => {
         navigation.navigate('Register');
     };
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontFamily: 'Arial',
         position: 'relative',
         lineHeight: 46,
         right: 100,
