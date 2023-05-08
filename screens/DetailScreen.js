@@ -7,9 +7,13 @@ import { Fontisto } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
 import firebase from '../firebase';
 
-const DetailScreen = ({ route }) => {
+const DetailScreen = ({ navigation, route }) => {
     const { item } = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
+
+    const handleItemPress = (item) => {
+        navigation.navigate('GantiGambarKos', { item });
+    };
 
     const handleFavoritePress = async () => {
         const user = firebase.auth().currentUser;
@@ -52,7 +56,9 @@ const DetailScreen = ({ route }) => {
                 />
             </TouchableOpacity>
             <Text style={styles.title}>{item.name}</Text>
-            <Text style={styles.title}>{item.kostid}</Text>
+            <TouchableOpacity style={styles.listItemRecom} onPress={() => handleItemPress(item)}>
+                <Text>Ganti Gambar</Text>
+            </TouchableOpacity>
             <ScrollView>
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar</Text>

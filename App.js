@@ -8,6 +8,7 @@ import DetailScreen from './screens/DetailScreen';
 import SearchScreen from './screens/SearchScreen';
 import HomeTabNavigator from './screens/TabNavigator';
 import EditProfileScreen from './screens/EditProfileScreen';
+import GantiImageKostScreen from './screens/GantiGambar';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="Detail" component={DetailScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="GantiGambarKos" component={GantiImageKostScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
