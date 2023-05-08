@@ -56,6 +56,7 @@ const DetailScreen = ({ route }) => {
             <ScrollView>
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar</Text>
+<<<<<<< HEAD
                     <View style={styles.textList}>
                         <MaterialCommunityIcons name="air-conditioner" size={24} color="black" />
                         <Text style={styles.ListText}>Air Conditioner</Text>
@@ -72,10 +73,29 @@ const DetailScreen = ({ route }) => {
                         <MaterialCommunityIcons name="cupboard" size={24} color="black" />
                         <Text style={styles.ListText}>Lemari</Text>
                     </View>
+=======
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="air-conditioner" size={24} color="black" />
+                        <Text style={styles.ListText}>Air Conditioner</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="bed-single" size={24} color="black" />
+                        <Text style={styles.ListText}>Kasur</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="desk" size={24} color="black" />
+                        <Text style={styles.ListText}>Meja belajar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="cupboard" size={24} color="black" />
+                        <Text style={styles.ListText}>Lemari</Text>
+                    </TouchableOpacity>
+>>>>>>> origin/main
 
                 </View>
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar Mandi</Text>
+<<<<<<< HEAD
                     <View style={styles.textList}>
                         <FontAwesome name="bathtub" size={24} color="black" />
                         <Text style={styles.ListText}>Bak Mandi</Text>
@@ -92,10 +112,29 @@ const DetailScreen = ({ route }) => {
                         <MaterialCommunityIcons name="hanger" size={24} color="black" />
                         <Text style={styles.ListText}>Jemuran</Text>
                     </View>
+=======
+                    <TouchableOpacity style={styles.textList}>
+                        <FontAwesome name="bathtub" size={24} color="black" />
+                        <Text style={styles.ListText}>Bak Mandi</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="toilet" size={24} color="black" />
+                        <Text style={styles.ListText}>Toilet duduk</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <FontAwesome name="shower" size={24} color="black" />
+                        <Text style={styles.ListText}>Shower</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="hanger" size={24} color="black" />
+                        <Text style={styles.ListText}>Jemuran</Text>
+                    </TouchableOpacity>
+>>>>>>> origin/main
 
                 </View>
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Umum</Text>
+<<<<<<< HEAD
                     <View style={styles.textList}>
                         <Fontisto name="wifi-logo" size={24} color="black" />
                         <Text style={styles.ListText}>Free Wifi</Text>
@@ -112,10 +151,29 @@ const DetailScreen = ({ route }) => {
                         <MaterialIcons name="local-parking" size={24} color="black" />
                         <Text style={styles.ListText}>Area Parkir</Text>
                     </View>
+=======
+                    <TouchableOpacity style={styles.textList}>
+                        <Fontisto name="wifi-logo" size={24} color="black" />
+                        <Text style={styles.ListText}>Free Wifi</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="stove" size={24} color="black" />
+                        <Text style={styles.ListText}>Dapur</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="cctv" size={24} color="black" />
+                        <Text style={styles.ListText}>CCTV 24 jam</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialIcons name="local-parking" size={24} color="black" />
+                        <Text style={styles.ListText}>Area Parkir</Text>
+                    </TouchableOpacity>
+>>>>>>> origin/main
 
                 </View>
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Peraturan Kos</Text>
+<<<<<<< HEAD
                     <View style={styles.textList}>
                         <MaterialCommunityIcons name="hours-24" size={24} color="black" />
                         <Text style={styles.ListText}>Akses 24 jam</Text>
@@ -128,14 +186,32 @@ const DetailScreen = ({ route }) => {
                         <Foundation name="no-smoking" size={24} color="black" />
                         <Text style={styles.ListText}>Dilarang Merokok</Text>
                     </View>
+=======
+                    <TouchableOpacity style={styles.textList}>
+                        <MaterialCommunityIcons name="hours-24" size={24} color="black" />
+                        <Text style={styles.ListText}>Akses 24 jam</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <Foundation name="no-dogs" size={24} color="black" />
+                        <Text style={styles.ListText}>Dilarang membawa hewan buas</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.textList}>
+                        <Foundation name="no-smoking" size={24} color="black" />
+                        <Text style={styles.ListText}>Dilarang Merokok</Text>
+                    </TouchableOpacity>
+>>>>>>> origin/main
 
                 </View>
             </ScrollView>
             <View style={styles.footer}>
                 <Text style={styles.price}>Rp. 6.500.000</Text>
+<<<<<<< HEAD
                 <TouchableOpacity>
                     <Text style={styles.button}>Ajukan Sewa</Text>
                 </TouchableOpacity>
+=======
+                <Text style={styles.button}>Ajukan Sewa</Text>
+>>>>>>> origin/main
             </View>
         </View>
     );
@@ -168,18 +244,28 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         backgroundColor: "#00AA13",
         padding: 15,
+<<<<<<< HEAD
         paddingHorizontal: 30,
+=======
+        paddingHorizontal: 50,
+>>>>>>> origin/main
         borderRadius: 30,
         fontSize: 15,
         fontWeight: "bold",
         color: "#00203FFF",
         borderWidth: 1,
         borderColor: "#00203FFF",
+<<<<<<< HEAD
         marginLeft: 100,
     },
     footer: {
         borderRadius: 10,
         flexDirection: 'row',
+=======
+    },
+    footer: {
+        borderRadius: 10,
+>>>>>>> origin/main
         backgroundColor: "#ffc0cb",
         alignItems: "center",
     },
