@@ -41,14 +41,6 @@ const SearchScreen = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.searchContainer}>
-                <TextInput
-                    style={styles.searchInput}
-                    placeholder="Search items"
-                    onChangeText={(text) => setSearchText(text)}
-                    value={searchText}
-                />
-            </View>
             <Text style={styles.title}>Search Results for "{searchText}"</Text>
             <FlatList
                 data={items}
@@ -79,8 +71,8 @@ const styles = StyleSheet.create({
     searchContainer: {
         flexDirection: 'row',
         marginBottom: 10,
-      },
-      searchInput: {
+    },
+    searchInput: {
         flex: 1,
         borderWidth: 1,
         borderColor: 'grey',
@@ -88,18 +80,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
         marginRight: 10,
-      },
-      searchButton: {
+    },
+    searchButton: {
         backgroundColor: 'blue',
         borderRadius: 5,
         paddingVertical: 10,
         paddingHorizontal: 20,
         alignItems: 'center',
-      },
-      searchButtonText: {
+    },
+    searchButtonText: {
         color: 'white',
         fontSize: 18,
-      },
+    },
 });
 
 export default SearchScreen;

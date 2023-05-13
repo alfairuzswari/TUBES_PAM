@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput, Image, ScrollView, SafeAreaView } from 'react-native';
 import firebase from '../firebase';
+import * as Location from 'expo-location';
+import MapView, { Marker } from 'react-native-maps';
+
 
 const HomeScreen = ({ navigation }) => {
   const [items, setItems] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [userName, setUserName] = useState('');
+  const [userLocation, setUserLocation] = useState(null);
+
+
+  const getLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.error('Permission to access location was denied');
+      return;
+    }
+
+    const location = await Location.getCurrentPositionAsync({});
+    setUserLocation(location);
+  };
+
 
   const handleSearchPress = () => {
     navigation.navigate('Search', { searchQuery: searchText });
@@ -50,6 +67,7 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     fetchUserData();
     fetchItems();
+    getLocation();
   }, []);
 
 
@@ -69,7 +87,7 @@ const HomeScreen = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>i-kost</Text>
       <View style={styles.searchContainer}>
         <TextInput
@@ -94,8 +112,14 @@ const HomeScreen = ({ navigation }) => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-      </View>
+      </View >
       <View style={styles.promoList}>
+        <View
+          style={{
+            borderBottomColor: 'black',
+            borderBottomWidth: StyleSheet.hairlineWidth,
+          }}
+        />
         <Text style={styles.TextRekomPromo}>Promo</Text>
         <FlatList
           data={items}
@@ -105,7 +129,29 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
 
-    </View>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: userLocation?.coords.latitude || 0,
+          longitude: userLocation?.coords.longitude || 0,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+        {userLocation && (
+          <Marker
+            pinColor={'Blue'}
+            coordinate={{
+              latitude: userLocation.coords.latitude,
+              longitude: userLocation.coords.longitude,
+            }}
+            title="Lokasi Anda"
+            description="Ini adalah lokasi Anda saat ini"
+          />
+        )}
+      </MapView>
+
+    </ScrollView >
   );
 };
 
@@ -180,7 +226,7 @@ const styles = StyleSheet.create({
   listItemPromo: {
     marginHorizontal: 7,
     marginBottom: 5,
-    width: '33.3%',
+    width: '30%',
     alignItems: 'center',
     backgroundColor: '#f8f8f8',
     borderRadius: 10,
@@ -196,7 +242,13 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontSize: 24,
-  }
+  },
+  map: {
+    width: '100%',
+    height: 300,
+    marginBottom: 10,
+  },
+
 });
 
 export default HomeScreen;

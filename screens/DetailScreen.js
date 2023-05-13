@@ -5,11 +5,18 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
+import Modal from "react-native-modal";
 import firebase from '../firebase';
+import WaImage from '../assets/WhatsApp.svg.webp';
 
-const DetailScreen = ({ route }) => {
+const DetailScreen = ({ navigation, route }) => {
     const { item } = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
+    const [modal, setModal] = useState(false);
+
+    const handleItemPress = (item) => {
+        navigation.navigate('GantiGambarKos', { item });
+    };
 
     const handleFavoritePress = async () => {
         const user = firebase.auth().currentUser;
@@ -42,98 +49,136 @@ const DetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: item.imageUrl }} style={styles.itemImage} />
-            <TouchableOpacity style={styles.favoriteButton} onPress={handleFavoritePress}>
-                <MaterialIcons
-                    name={isFavorite ? 'favorite' : 'favorite-border'}
-                    size={50}
-                    color="red"
-                    style={{ position: 'relative', bottom: 300 }}
-                />
-            </TouchableOpacity>
-            <Text style={styles.title}>{item.name}</Text>
-            <Text style={styles.title}>{item.kostid}</Text>
             <ScrollView>
+                <Image source={{ uri: item.imageUrl }} style={styles.itemImage} />
+                <TouchableOpacity style={styles.favoriteButton} onPress={handleFavoritePress}>
+                    <MaterialIcons
+                        name={isFavorite ? 'favorite' : 'favorite-border'}
+                        size={50}
+                        color="red"
+                        style={{ position: 'relative', bottom: 300 }}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.title}>{item.name}</Text>
+                <TouchableOpacity style={styles.listItemRecom} onPress={() => handleItemPress(item)}>
+                    <Text>Ganti Gambar</Text>
+                </TouchableOpacity>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
+
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar</Text>
-                    <TouchableOpacity style={styles.textList}>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="air-conditioner" size={24} color="black" />
                         <Text style={styles.ListText}>Air Conditioner</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="bed-single" size={24} color="black" />
                         <Text style={styles.ListText}>Kasur</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="desk" size={24} color="black" />
                         <Text style={styles.ListText}>Meja belajar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="cupboard" size={24} color="black" />
                         <Text style={styles.ListText}>Lemari</Text>
-                    </TouchableOpacity>
-
+                    </View>
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar Mandi</Text>
-                    <TouchableOpacity style={styles.textList}>
+                    <View style={styles.textList}>
                         <FontAwesome name="bathtub" size={24} color="black" />
                         <Text style={styles.ListText}>Bak Mandi</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="toilet" size={24} color="black" />
                         <Text style={styles.ListText}>Toilet duduk</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <FontAwesome name="shower" size={24} color="black" />
                         <Text style={styles.ListText}>Shower</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="hanger" size={24} color="black" />
                         <Text style={styles.ListText}>Jemuran</Text>
-                    </TouchableOpacity>
-
+                    </View>
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Umum</Text>
-                    <TouchableOpacity style={styles.textList}>
+                    <View style={styles.textList}>
                         <Fontisto name="wifi-logo" size={24} color="black" />
                         <Text style={styles.ListText}>Free Wifi</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="stove" size={24} color="black" />
                         <Text style={styles.ListText}>Dapur</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="cctv" size={24} color="black" />
                         <Text style={styles.ListText}>CCTV 24 jam</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <MaterialIcons name="local-parking" size={24} color="black" />
                         <Text style={styles.ListText}>Area Parkir</Text>
-                    </TouchableOpacity>
-
+                    </View>
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Peraturan Kos</Text>
-                    <TouchableOpacity style={styles.textList}>
+                    <View style={styles.textList}>
                         <MaterialCommunityIcons name="hours-24" size={24} color="black" />
                         <Text style={styles.ListText}>Akses 24 jam</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <Foundation name="no-dogs" size={24} color="black" />
                         <Text style={styles.ListText}>Dilarang membawa hewan buas</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.textList}>
+                    </View>
+                    <View style={styles.textList}>
                         <Foundation name="no-smoking" size={24} color="black" />
                         <Text style={styles.ListText}>Dilarang Merokok</Text>
-                    </TouchableOpacity>
+                    </View>
 
                 </View>
             </ScrollView>
             <View style={styles.footer}>
-                <Text style={styles.price}>Rp. 6.500.000</Text>
-                <Text style={styles.button}>Ajukan Sewa</Text>
+                <Text style={styles.price}>Rp.{item.harga} / Tahun</Text>
+                <TouchableOpacity onPress={() => setModal(true)}>
+                    <Text style={styles.button}>Ajukan Sewa</Text>
+                </TouchableOpacity>
+                <Modal isVisible={modal}>
+                    <View style={styles.popUpModal}>
+                        <TouchableOpacity onPress={() => setModal(false)} style={{ justifyContent: 'center', alignItems: 'flex-end' }}>
+                            <Text style={{ fontSize: 15, fontWeight: "bold" }}>x</Text>
+                        </TouchableOpacity>
+                        <Text style={{ textAlign: 'center' }}>Pesan Melalui Contact Dibawah ini</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <Image style={styles.ImageModal} source={WaImage} />
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gray', marginTop: 12, }}>{item.noTelp}</Text>
+                        </View>
+                    </View>
+                </Modal>
             </View>
         </View>
     );
@@ -166,16 +211,18 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         backgroundColor: "#00AA13",
         padding: 15,
-        paddingHorizontal: 50,
+        paddingHorizontal: 30,
         borderRadius: 30,
         fontSize: 15,
         fontWeight: "bold",
         color: "#00203FFF",
         borderWidth: 1,
         borderColor: "#00203FFF",
+        marginLeft: 100,
     },
     footer: {
         borderRadius: 10,
+        flexDirection: 'row',
         backgroundColor: "#ffc0cb",
         alignItems: "center",
     },
@@ -193,6 +240,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 5,
 
+    },
+    popUpModal: {
+        height: 150,
+        backgroundColor: 'white',
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+        borderRadius: 6,
+    },
+    ImageModal: {
+        height: 60,
+        width: 50,
+        marginRight: 5,
     },
 });
 

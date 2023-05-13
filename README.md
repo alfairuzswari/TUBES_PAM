@@ -12,3 +12,10 @@ npm install @react-navigation/bottom-tabs <br />
 <br />
 ##Install Firebase <br />
 npm install firebase <br />
+<br />
+##Install MapView <br />
+expo install expo-location <br />
+expo install react-native-maps <br />
+<br />
+##Install Modal <br />
+npm i react-native-modal <br />

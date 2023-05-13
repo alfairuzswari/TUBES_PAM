@@ -15,17 +15,25 @@ const ProfileScreen = ({ navigation }) => {
     const user = firebase.auth().currentUser;
     if (user) {
       const userRef = firebase.firestore().collection('users').doc(user.uid);
+      const storageRef = firebase.storage().ref();
+      const profilePictureRef = storageRef.child(`profile_pictures/${user.uid}`);
       userRef
         .get()
         .then((doc) => {
           if (doc.exists) {
             setUser(doc.data().name);
-            setImage(doc.data().imageUrl)
           }
         })
         .catch((error) => {
           console.error('Error mendapatkan data:', error);
         });
+
+      try {
+        const url = await profilePictureRef.getDownloadURL();
+        setImage(url);
+      } catch (error) {
+        console.error("Error fetching profile picture:", error);
+      }
     }
   };
 
@@ -48,7 +56,12 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
-        <Image source={{ uri: userImage }} style={styles.profileImage} />
+        {userImage && (
+          <Image
+            source={{ uri: userImage }}
+            style={styles.profileImage}
+          />
+        )}
         <Text style={styles.profileName}>{userName}</Text>
         <TouchableOpacity onPress={() => handleEditProfile()}>
           <Text style={styles.editProfile}>Edit Profile</Text>
