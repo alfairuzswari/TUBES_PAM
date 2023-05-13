@@ -5,11 +5,14 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
+import Modal from "react-native-modal";
 import firebase from '../firebase';
+import WaImage from '../assets/WhatsApp.svg.webp';
 
 const DetailScreen = ({ navigation, route }) => {
     const { item } = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
+    const [modal, setModal] = useState(false);
 
     const handleItemPress = (item) => {
         navigation.navigate('GantiGambarKos', { item });
@@ -46,20 +49,27 @@ const DetailScreen = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: item.imageUrl }} style={styles.itemImage} />
-            <TouchableOpacity style={styles.favoriteButton} onPress={handleFavoritePress}>
-                <MaterialIcons
-                    name={isFavorite ? 'favorite' : 'favorite-border'}
-                    size={50}
-                    color="red"
-                    style={{ position: 'relative', bottom: 300 }}
-                />
-            </TouchableOpacity>
-            <Text style={styles.title}>{item.name}</Text>
-            <TouchableOpacity style={styles.listItemRecom} onPress={() => handleItemPress(item)}>
-                <Text>Ganti Gambar</Text>
-            </TouchableOpacity>
             <ScrollView>
+                <Image source={{ uri: item.imageUrl }} style={styles.itemImage} />
+                <TouchableOpacity style={styles.favoriteButton} onPress={handleFavoritePress}>
+                    <MaterialIcons
+                        name={isFavorite ? 'favorite' : 'favorite-border'}
+                        size={50}
+                        color="red"
+                        style={{ position: 'relative', bottom: 300 }}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.title}>{item.name}</Text>
+                <TouchableOpacity style={styles.listItemRecom} onPress={() => handleItemPress(item)}>
+                    <Text>Ganti Gambar</Text>
+                </TouchableOpacity>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
+
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar</Text>
                     <View style={styles.textList}>
@@ -78,8 +88,13 @@ const DetailScreen = ({ navigation, route }) => {
                         <MaterialCommunityIcons name="cupboard" size={24} color="black" />
                         <Text style={styles.ListText}>Lemari</Text>
                     </View>
-
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar Mandi</Text>
                     <View style={styles.textList}>
@@ -98,8 +113,13 @@ const DetailScreen = ({ navigation, route }) => {
                         <MaterialCommunityIcons name="hanger" size={24} color="black" />
                         <Text style={styles.ListText}>Jemuran</Text>
                     </View>
-
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Umum</Text>
                     <View style={styles.textList}>
@@ -118,8 +138,13 @@ const DetailScreen = ({ navigation, route }) => {
                         <MaterialIcons name="local-parking" size={24} color="black" />
                         <Text style={styles.ListText}>Area Parkir</Text>
                     </View>
-
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                    }}
+                />
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Peraturan Kos</Text>
                     <View style={styles.textList}>
@@ -138,10 +163,22 @@ const DetailScreen = ({ navigation, route }) => {
                 </View>
             </ScrollView>
             <View style={styles.footer}>
-                <Text style={styles.price}>Rp. 6.500.000</Text>
-                <TouchableOpacity>
+                <Text style={styles.price}>Rp.{item.harga} / Tahun</Text>
+                <TouchableOpacity onPress={() => setModal(true)}>
                     <Text style={styles.button}>Ajukan Sewa</Text>
                 </TouchableOpacity>
+                <Modal isVisible={modal}>
+                    <View style={styles.popUpModal}>
+                        <TouchableOpacity onPress={() => setModal(false)} style={{ justifyContent: 'center', alignItems: 'flex-end' }}>
+                            <Text style={{ fontSize: 15, fontWeight: "bold" }}>x</Text>
+                        </TouchableOpacity>
+                        <Text style={{ textAlign: 'center' }}>Pesan Melalui Contact Dibawah ini</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <Image style={styles.ImageModal} source={WaImage} />
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gray', marginTop: 12, }}>{item.noTelp}</Text>
+                        </View>
+                    </View>
+                </Modal>
             </View>
         </View>
     );
@@ -203,6 +240,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 5,
 
+    },
+    popUpModal: {
+        height: 150,
+        backgroundColor: 'white',
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+        borderRadius: 6,
+    },
+    ImageModal: {
+        height: 60,
+        width: 50,
+        marginRight: 5,
     },
 });
 
