@@ -18,4 +18,4 @@ expo install expo-location <br />
 expo install react-native-maps <br />
 <br />
 ##Install Modal <br />
-npm install react-modal <br />
+npm i react-native-modal <br />
