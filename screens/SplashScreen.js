@@ -8,15 +8,15 @@ class Home extends Component {
         this.state = {};
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.props.navigation.dispatch(StackActions.replace('Login'));
-        }, 3000);
-    }
+    //componentDidMount() {
+        //setTimeout(() => {
+            //this.props.navigation.dispatch(StackActions.replace('Login'));
+        //}, 3000);
+    //}
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ADB3BC' }}>
                 {/*<logo.png/>*/}
                 <Image source={require('../assets/logo.png')} style={{ width: 200, height: 200 }}/>
             </View>
