@@ -132,12 +132,11 @@ const HomeScreen = ({ navigation }) => {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: userLocation?.coords.latitude || 0,
-          longitude: userLocation?.coords.longitude || 0,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
+          latitude: userLocation?.coords.latitude || -5.357814,
+          longitude: userLocation?.coords.longitude || 105.314771,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        }}>
         {userLocation && (
           <Marker
             pinColor={'Blue'}
