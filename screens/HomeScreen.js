@@ -129,6 +129,7 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
 
+      <Text style={styles.TextRekomPromo}>Map</Text>
       <MapView
         style={styles.map}
         initialRegion={{

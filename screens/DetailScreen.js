@@ -9,14 +9,10 @@ import Modal from "react-native-modal";
 import firebase from '../firebase';
 import WaImage from '../assets/WhatsApp.svg.webp';
 
-const DetailScreen = ({ navigation, route }) => {
+const DetailScreen = ({route }) => {
     const { item } = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
     const [modal, setModal] = useState(false);
-
-    const handleItemPress = (item) => {
-        navigation.navigate('GantiGambarKos', { item });
-    };
 
     const handleFavoritePress = async () => {
         const user = firebase.auth().currentUser;
@@ -60,9 +56,6 @@ const DetailScreen = ({ navigation, route }) => {
                     />
                 </TouchableOpacity>
                 <Text style={styles.title}>{item.name}</Text>
-                <TouchableOpacity style={styles.listItemRecom} onPress={() => handleItemPress(item)}>
-                    <Text>Ganti Gambar</Text>
-                </TouchableOpacity>
 
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar</Text>
