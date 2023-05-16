@@ -88,7 +88,9 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>i-kost</Text>
+      <Image 
+      style={styles.gambar} 
+      source={require('../assets/logo.png')} />
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -155,11 +157,15 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  gambar: {
+    marginTop: 0,
+    width: 75,
+    height: 75,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 10,
     backgroundColor: '#ADB3BC',
-    paddingTop: 20,
   },
   title: {
     fontSize: 24,
