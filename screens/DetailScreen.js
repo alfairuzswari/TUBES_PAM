@@ -63,12 +63,6 @@ const DetailScreen = ({ navigation, route }) => {
                 <TouchableOpacity style={styles.listItemRecom} onPress={() => handleItemPress(item)}>
                     <Text>Ganti Gambar</Text>
                 </TouchableOpacity>
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                    }}
-                />
 
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar</Text>
@@ -89,12 +83,7 @@ const DetailScreen = ({ navigation, route }) => {
                         <Text style={styles.ListText}>Lemari</Text>
                     </View>
                 </View>
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                    }}
-                />
+
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Kamar Mandi</Text>
                     <View style={styles.textList}>
@@ -114,12 +103,7 @@ const DetailScreen = ({ navigation, route }) => {
                         <Text style={styles.ListText}>Jemuran</Text>
                     </View>
                 </View>
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                    }}
-                />
+                
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Umum</Text>
                     <View style={styles.textList}>
@@ -139,12 +123,7 @@ const DetailScreen = ({ navigation, route }) => {
                         <Text style={styles.ListText}>Area Parkir</Text>
                     </View>
                 </View>
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                    }}
-                />
+                
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Peraturan Kos</Text>
                     <View style={styles.textList}>
@@ -187,10 +166,12 @@ const DetailScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#ADB3BC",
     },
     title: {
         fontSize: 26,
         fontWeight: 'bold',
+        paddingLeft: 10,
     },
     itemImage: {
         width: '100%',
@@ -206,25 +187,34 @@ const styles = StyleSheet.create({
     },
     detailContainer: {
         alignItems: "flex-start",
+        borderRadius: 30,
+        backgroundColor: "#d3d3d3",
+        paddingTop: 10,
+        paddingBottom: 20,
+        paddingLeft: 15,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginRight: 5,
     },
     button: {
         alignSelf: "center",
-        backgroundColor: "#00AA13",
+        backgroundColor: "#44E55E",
         padding: 15,
-        paddingHorizontal: 30,
+        paddingHorizontal: 25,
         borderRadius: 30,
         fontSize: 15,
         fontWeight: "bold",
         color: "#00203FFF",
         borderWidth: 1,
         borderColor: "#00203FFF",
-        marginLeft: 100,
+        marginLeft: 50,
     },
     footer: {
         borderRadius: 10,
         flexDirection: 'row',
-        backgroundColor: "#ffc0cb",
+        backgroundColor: "#D1D5DB",
         alignItems: "center",
+        paddingLeft: 10,
     },
     price: {
         fontSize: 18,

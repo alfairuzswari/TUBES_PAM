@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
   recomendationList: {
     marginVertical: 10,
     backgroundColor: '#666666',
+    borderRadius: 10,
   },
   listItemPromo: {
     marginHorizontal: 7,
