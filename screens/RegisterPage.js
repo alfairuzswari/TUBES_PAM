@@ -15,9 +15,13 @@ const RegisterPage = ({ navigation }) => {
     const handleRegister = async () => {
         try {
             if (password !== confirmPassword) {
-                        Alert.alert('Error', 'Password and confirm password Tidak Sama');
-                        return;
-                    }
+                Alert.alert('Error', 'Password and confirm password Tidak Sama');
+                return;
+            }
+            if (name == '') {
+                Alert.alert('Error', 'Nama kosong');
+                return;
+            }
             const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
             // Store user's name in Firestore
@@ -25,7 +29,23 @@ const RegisterPage = ({ navigation }) => {
 
             navigation.navigate('Login');
         } catch (error) {
-            alert(error.message);
+            if (error.code === 'auth/email-already-in-use') {
+                Alert.alert('Error', 'Email ini sudah terdaftar', [
+                    { text: 'OK' },
+                ]);
+            } else if (error.code === 'auth/invalid-email') {
+                Alert.alert('Error', 'Email tidak valid', [
+                    { text: 'OK' },
+                ]);
+            } else if (error.code === 'auth/operation-not-allowed') {
+                Alert.alert('Error', 'Pendaftaran email/password tidak diizinkan', [
+                    { text: 'OK' },
+                ]);
+            } else if (error.code === 'auth/weak-password') {
+                Alert.alert('Error', 'Kata sandi terlalu lemah', [
+                    { text: 'OK' },
+                ]);
+            }
         }
     };
 

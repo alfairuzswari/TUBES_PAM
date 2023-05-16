@@ -7,7 +7,7 @@ const LoginPage = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
- 
+
     const goToRegisterPage = () => {
         navigation.navigate('Register');
     };
@@ -21,10 +21,23 @@ const LoginPage = ({ navigation }) => {
                 navigation.navigate('Home');
             })
             .catch((error) => {
-                Alert.alert('Email/Password Salah', [
-                    { text: 'OK', onPress: () => console.log('OK Pressed') },
-                ]);
-
+                if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Error', 'Email tidak valid', [
+                        { text: 'OK'},
+                    ]);
+                } else if (error.code === 'auth/user-disabled') {
+                    Alert.alert('Error', 'Akun pengguna dinonaktifkan', [
+                        { text: 'OK'},
+                    ]);
+                } else if (error.code === 'auth/user-not-found') {
+                    Alert.alert('Error', 'Pengguna tidak ditemukan', [
+                        { text: 'OK'},
+                    ]);
+                } else if (error.code === 'auth/wrong-password') {
+                    Alert.alert('Error', 'Password salah', [
+                        { text: 'OK'},
+                    ]);
+                }
             });
     };
 
