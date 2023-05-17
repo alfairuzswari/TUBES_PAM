@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
         marginBottom: 15,
+        borderRadius: 15,
     },
     searchContainer: {
         flexDirection: 'row',

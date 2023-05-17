@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: 'bold',
         paddingLeft: 10,
+        marginBottom: 20,
     },
     itemImage: {
         width: '100%',
