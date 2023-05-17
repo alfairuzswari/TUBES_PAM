@@ -8,8 +8,10 @@ import { Foundation } from '@expo/vector-icons';
 import Modal from "react-native-modal";
 import firebase from '../firebase';
 import WaImage from '../assets/WhatsApp.svg.webp';
+import MapView from 'react-native-maps';
+import {Marker} from 'react-native-maps';
 
-const DetailScreen = ({route }) => {
+const DetailScreen = ({ route }) => {
     const { item } = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
     const [modal, setModal] = useState(false);
@@ -96,7 +98,7 @@ const DetailScreen = ({route }) => {
                         <Text style={styles.ListText}>Jemuran</Text>
                     </View>
                 </View>
-                
+
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Fasilitas Umum</Text>
                     <View style={styles.textList}>
@@ -116,7 +118,7 @@ const DetailScreen = ({route }) => {
                         <Text style={styles.ListText}>Area Parkir</Text>
                     </View>
                 </View>
-                
+
                 <View style={styles.detailContainer}>
                     <Text style={styles.desc}>Peraturan Kos</Text>
                     <View style={styles.textList}>
@@ -133,7 +135,28 @@ const DetailScreen = ({route }) => {
                     </View>
 
                 </View>
+
+                <Text style={styles.TextRekomPromo}>Map</Text>
+                <MapView
+                    style={styles.map}
+                    initialRegion={{
+                        latitude: item.latitude,
+                        longitude: item.longitude,
+                        latitudeDelta: 0.015,
+                        longitudeDelta: 0.0121,
+                    }}>
+                    <Marker
+                        pinColor={'Blue'}
+                        coordinate={{
+                            latitude: item.latitude,
+                            longitude: item.longitude,
+                        }}
+                        title="Lokasi Kost"
+                        description="Ini adalah lokasi Kost"
+                    />
+                </MapView>
             </ScrollView>
+
             <View style={styles.footer}>
                 <Text style={styles.price}>Rp.{item.harga} / Tahun</Text>
                 <TouchableOpacity onPress={() => setModal(true)}>
@@ -142,7 +165,7 @@ const DetailScreen = ({route }) => {
                 <Modal isVisible={modal}>
                     <View style={styles.popUpModal}>
                         <TouchableOpacity onPress={() => setModal(false)} style={{ justifyContent: 'center', alignItems: 'flex-end' }}>
-                            <Text style={{ fontSize: 15, fontWeight: "bold" }}>x</Text>
+                            <Text style={{ fontSize: 15, fontWeight: "bold", color: 'gray' }}>x</Text>
                         </TouchableOpacity>
                         <Text style={{ textAlign: 'center' }}>Pesan Melalui Contact Dibawah ini</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -235,6 +258,11 @@ const styles = StyleSheet.create({
         height: 60,
         width: 50,
         marginRight: 5,
+    },
+    map: {
+        width: '100%',
+        height: 300,
+        marginBottom: 10,
     },
 });
 

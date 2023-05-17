@@ -60,7 +60,7 @@ const RegisterPage = ({ navigation }) => {
             <TextInput
                 style={styles.input}
                 placeholder="Name"
-                onChangeText={(text) => setName(text)}
+                onChangeText={setName}
                 value={name}
             />
             <TextInput

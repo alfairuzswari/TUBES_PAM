@@ -16,7 +16,7 @@ const LoginPage = ({ navigation }) => {
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
+            .then(() => {
                 // Signed in
                 navigation.navigate('Home');
             })

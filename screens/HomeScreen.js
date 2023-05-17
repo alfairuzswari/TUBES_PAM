@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput, Image, ScrollView, SafeAreaView } from 'react-native';
 import firebase from '../firebase';
 import * as Location from 'expo-location';
-import MapView, { Marker } from 'react-native-maps';
 
 
 const HomeScreen = ({ navigation }) => {
   const [items, setItems] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [userName, setUserName] = useState('');
-  const [userLocation, setUserLocation] = useState(null);
 
 
   const getLocation = async () => {
@@ -130,28 +128,6 @@ const HomeScreen = ({ navigation }) => {
           keyExtractor={(item) => item.id}
         />
       </View>
-
-      <Text style={styles.TextRekomPromo}>Map</Text>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: userLocation?.coords.latitude || -5.357814,
-          longitude: userLocation?.coords.longitude || 105.314771,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        }}>
-        {userLocation && (
-          <Marker
-            pinColor={'Blue'}
-            coordinate={{
-              latitude: userLocation.coords.latitude,
-              longitude: userLocation.coords.longitude,
-            }}
-            title="Lokasi Anda"
-            description="Ini adalah lokasi Anda saat ini"
-          />
-        )}
-      </MapView>
 
     </ScrollView >
   );
