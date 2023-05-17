@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput, Image, ScrollView, SafeAreaView } from 'react-native';
 import firebase from '../firebase';
-import * as Location from 'expo-location';
 
 
 const HomeScreen = ({ navigation }) => {
   const [items, setItems] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [userName, setUserName] = useState('');
-
-
-  const getLocation = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.error('Permission to access location was denied');
-      return;
-    }
-
-    const location = await Location.getCurrentPositionAsync({});
-    setUserLocation(location);
-  };
-
 
   const handleSearchPress = () => {
     navigation.navigate('Search', { searchQuery: searchText });
@@ -65,7 +51,6 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     fetchUserData();
     fetchItems();
-    getLocation();
   }, []);
 
 
